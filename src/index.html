@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Angular QuickStart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="/">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-startup-image" href="wps.png">
+    <link rel="icon" sizes="192x192" href="wps.png">
+    <meta name="theme-color" content="#EC008B">
+    <meta name="RATING" content="RTA-5042-1996-1400-1577-RTA" />
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+  <my-app><div class="content"><img src="travel.jpg"></div></my-app>
+    <script>
+      // register service worker
+
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js', { scope: '/' }).then(function(reg) {
+
+          if(reg.installing) {
+            console.log('Service worker installing');
+          } else if(reg.waiting) {
+            console.log('Service worker installed');
+          } else if(reg.active) {
+            console.log('Service worker active');
+          }
+
+        }).catch(function(error) {
+          // registration failed
+          console.log('Registration failed with ' + error);
+        });
+      }
+    </script>
+  </body>
+</html>
